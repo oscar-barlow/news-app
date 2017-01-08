@@ -4,12 +4,13 @@
   assert.isTrue(articleList);
 })();
 
-// 
-// (function testArticleListCreation() {
-//   function ArticleDouble() {};
-//   var articleDouble = new ArticleDouble();
-//
-//   var articleList = new ArticleList(articleDouble);
-//
-//   assert.isTrue(articleList.articles().includes(articleDouble));
-// })();
+
+(function testArticleListCanAddArticle() {
+  function ArticleDouble() {};
+  var articleDouble = new ArticleDouble();
+  var articleList = new ArticleList();
+
+  articleList.addArticle(articleDouble);
+
+  assert.isTrue(articleList.articles().includes(articleDouble));
+})();

@@ -1,4 +1,6 @@
-function ArticleList(){}
+function ArticleList(){
+  this._articles = []
+}
 
 (function(exports) {
 
@@ -6,6 +8,11 @@ function ArticleList(){}
     return this._articles;
   };
 
+  ArticleList.prototype.addArticle = function(article) {
+    this._articles.push(article);
+  };
+
   exports.articles = this.articles;
+  exports.addArticle = this.addArticle;
 
 })(this);
