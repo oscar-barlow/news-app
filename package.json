@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/oscar-barlow/news-app/issues"
   },
-  "homepage": "https://github.com/oscar-barlow/news-app#readme"
+  "homepage": "https://github.com/oscar-barlow/news-app#readme",
+  "dependencies": {
+    "http-server": "^0.9.0"
+  }
 }
