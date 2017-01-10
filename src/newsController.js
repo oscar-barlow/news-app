@@ -4,8 +4,16 @@ function NewsController(articleList) {
 
 (function(exports) {
 
-  NewsController.prototype.articleList = function( ){
+  NewsController.prototype.articleList = function() {
     return this._articleList;
+  };
+
+  NewsController.prototype.makeXHR = function() {
+    this._xhr = new XMLHttpRequest();
+  };
+
+  NewsController.prototype.unsentXHR = function() {
+    return this._xhr;
   };
 
   NewsController.prototype.getNewsFromGuardian = function(url) {
