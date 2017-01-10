@@ -34,10 +34,25 @@
   var newsController = new NewsController(articleListDouble);
   newsController._xhr = xhrDouble;
   newsController.openXHR("GET", "https://www.example.com", true);
-  
+
   assert.isTrue(xhrDouble.args[0] === "GET");
   assert.isTrue(xhrDouble.args[1] === "https://www.example.com");
   assert.isTrue(xhrDouble.args[2] === true);
+})();
+
+(function testXHRReadyState() {
+  function ArticleListDouble() {};
+  var articleListDouble = new ArticleListDouble();
+
+  function XHRDouble () {
+    this.readyState = 4;
+    this.status = 200;
+  };
+
+  var xhrDouble = new XHRDouble();
+  var newsController = new NewsController(articleListDouble);
+  newsController._xhr = xhrDouble;
+  assert.isTrue(newsController.xhrIsReady());
 })();
 
 (function testSendControllerXHR() {

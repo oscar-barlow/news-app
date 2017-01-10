@@ -24,6 +24,10 @@ function NewsController(articleList) {
     this.unsentXHR().open(method, url, boolean);
   };
 
+  NewsController.prototype.xhrIsReady = function(){
+    return (this.unsentXHR().readyState == 4 && this.unsentXHR().status == 200);
+  };
+
   NewsController.prototype.getNewsFromGuardian = function(url) {
     this._xhr = new XMLHttpRequest();
     request = this._xhr;
