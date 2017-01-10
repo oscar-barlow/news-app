@@ -40,21 +40,6 @@
   assert.isTrue(xhrDouble.args[2] === true);
 })();
 
-(function testXHRReadyState() {
-  function ArticleListDouble() {};
-  var articleListDouble = new ArticleListDouble();
-
-  function XHRDouble () {
-    this.readyState = 4;
-    this.status = 200;
-  };
-
-  var xhrDouble = new XHRDouble();
-  var newsController = new NewsController(articleListDouble);
-  newsController._xhr = xhrDouble;
-  assert.isTrue(newsController.xhrIsReady());
-})();
-
 (function testControllerCanReadXHRResponse() {
   function XHRDouble (){
     this.articles = {
@@ -74,7 +59,7 @@
   assert.isTrue(newsController.readXHRResponse()[0].webTitle === "An Example Article Title")
 })();
 
-(function testSendControllerXHR() {
+(function testControllerSendXHR() {
   function ArticleListDouble() {};
   var articleListDouble = new ArticleListDouble();
 

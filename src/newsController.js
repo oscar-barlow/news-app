@@ -17,24 +17,20 @@ function NewsController(articleList) {
   };
 
   NewsController.prototype.sendXHR = function() {
-    this._xhr.send();
+    this.xhr().send();
   };
 
   NewsController.prototype.openXHR = function(verb, url, boolean) {
-    this._xhr.open(verb, url, boolean);
-  };
-
-  NewsController.prototype.xhrIsReady = function(){
-    return (this.xhr().readyState == 4 && this.xhr().status == 200);
+    this.xhr().open(verb, url, boolean);
   };
 
   NewsController.prototype.readXHRResponse = function(){
-    response = this._xhr.articles.response.results;
+    response = this.xhr().articles.response.results;
     return response;
   };
 
   NewsController.prototype.getResultsFromAPI = function(){
-    this._xhr.onreadystatechange = function() {
+    this.xhr().onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         this.articles = JSON.parse(this.responseText);
       }
