@@ -12,7 +12,7 @@
 
   var newsController = new NewsController(articleListDouble);
   newsController.makeXHR();
-  assert.isTrue(newsController.unsentXHR().readyState === 0);
+  assert.isTrue(newsController.xhr().readyState === 0);
 })();
 
 (function testNewsControllerXHROpening(){
@@ -55,6 +55,25 @@
   assert.isTrue(newsController.xhrIsReady());
 })();
 
+(function testControllerCanReadXHRResponse() {
+  function XHRDouble (){
+    this.articles = {
+      "response": {
+        "results": [ { "webTitle": "An Example Article Title" } ]
+      }
+    }
+  };
+
+  function ArticleListDouble() {};
+  var articleListDouble = new ArticleListDouble();
+
+  var newsController = new NewsController(articleListDouble);
+  var xhrDouble = new XHRDouble();
+  newsController._xhr = xhrDouble;
+
+  assert.isTrue(newsController.readXHRResponse()[0].webTitle === "An Example Article Title")
+})();
+
 (function testSendControllerXHR() {
   function ArticleListDouble() {};
   var articleListDouble = new ArticleListDouble();
@@ -75,5 +94,4 @@
   newsController._xhr = xhrDouble;
   newsController.sendXHR()
   assert.isTrue(xhrDouble.sendCallCount === 1);
-
 })();

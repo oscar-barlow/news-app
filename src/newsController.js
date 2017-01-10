@@ -12,35 +12,34 @@ function NewsController(articleList) {
     this._xhr = new XMLHttpRequest();
   };
 
-  NewsController.prototype.unsentXHR = function() {
+  NewsController.prototype.xhr = function() {
     return this._xhr;
   };
 
   NewsController.prototype.sendXHR = function() {
-    this.unsentXHR().send();
+    this._xhr.send();
   };
 
-  NewsController.prototype.openXHR = function(method, url, boolean) {
-    this.unsentXHR().open(method, url, boolean);
+  NewsController.prototype.openXHR = function(verb, url, boolean) {
+    this._xhr.open(verb, url, boolean);
   };
 
   NewsController.prototype.xhrIsReady = function(){
-    return (this.unsentXHR().readyState == 4 && this.unsentXHR().status == 200);
+    return (this.xhr().readyState == 4 && this.xhr().status == 200);
   };
 
-  NewsController.prototype.getNewsFromGuardian = function(url) {
-    this._xhr = new XMLHttpRequest();
-    request = this._xhr;
+  NewsController.prototype.readXHRResponse = function(){
+    response = this._xhr.articles.response.results;
+    return response;
+  };
 
-    request.open("GET", "http://news-summary-api.herokuapp.com/guardian?apiRequestUrl=http://content.guardianapis.com/uk-news", true)
-    request.onreadystatechange = function() {
+  NewsController.prototype.getResultsFromAPI = function(){
+    this._xhr.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-        this.myText = JSON.parse(this.responseText);
-        console.log(this.myText);
-        console.log(this);
+        this.articles = JSON.parse(this.responseText);
       }
     };
-    request.send();
+    this.sendXHR();
   };
 
   exports.articleList = this.articleList;
