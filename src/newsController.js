@@ -16,6 +16,10 @@ function NewsController(articleList) {
     return this._xhr;
   };
 
+  NewsController.prototype.sendXHR = function(){
+    this.unsentXHR().send();
+  };
+
   NewsController.prototype.getNewsFromGuardian = function(url) {
     this._xhr = new XMLHttpRequest();
     request = this._xhr;
